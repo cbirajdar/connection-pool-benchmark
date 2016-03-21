@@ -12,9 +12,7 @@ import java.beans.PropertyVetoException;
 
     @Value("${datasource.driver-class-name}") private String dsDriverClassName;
 
-    @Value("${tomcat.jdbc.datasource.url}") private String tomcatJdbcUrl;
-
-    @Value("${hibernate.c3p0.datasource.url}") private String c3p0Url;
+    @Value("${datasource.url}") private String url;
 
     @Value("${datasource.username}") private String username;
 
@@ -31,7 +29,7 @@ import java.beans.PropertyVetoException;
     private DataSource tomcatJdbcDatasource() {
         org.apache.tomcat.jdbc.pool.DataSource dataSource = new org.apache.tomcat.jdbc.pool.DataSource();
         dataSource.setDriverClassName(dsDriverClassName);
-        dataSource.setUrl(tomcatJdbcUrl);
+        dataSource.setUrl(url);
         dataSource.setUsername(username);
         dataSource.setPassword(password);
         dataSource.setMaxActive(maxActive);
@@ -42,7 +40,7 @@ import java.beans.PropertyVetoException;
     private DataSource c3p0Datasource() throws PropertyVetoException {
         ComboPooledDataSource dataSource = new ComboPooledDataSource();
         dataSource.setDriverClass(dsDriverClassName);
-        dataSource.setJdbcUrl(c3p0Url);
+        dataSource.setJdbcUrl(url);
         dataSource.setUser(username);
         dataSource.setPassword(password);
         dataSource.setMaxPoolSize(maxActive);
